@@ -14,7 +14,9 @@
       user_id: 'no-user-id',
       photo: '/img/no-photo.jpg',
       name: 'Anonymous',
-      message: '(no message)'
+      message: '(no message)',
+      revision_text: null,
+      revision_image: null
     };    
     var new_message = {};
     new_message.user = data.user;
