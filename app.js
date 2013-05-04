@@ -3,6 +3,14 @@
  * Module dependencies.
  */
 
+var io = require('socket.io').listen(6666);
+
+io.sockets.on('connection', function (socket) {
+  socket.on('vStream ', function (data) {
+    console.log(data);
+  });
+});
+
 var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
