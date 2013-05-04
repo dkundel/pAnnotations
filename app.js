@@ -30,6 +30,8 @@ app.configure('development', function(){
 
 app.get('/', routes.index);
 app.get('/users', user.list);
+app.get('/presenter', routes.present);
+app.get('/viewer', routes.view);
 
 var server = http.createServer(app);
 server.listen(app.get('port'), function(){
