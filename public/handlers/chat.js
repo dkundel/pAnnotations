@@ -43,15 +43,21 @@
   }
 
   function add_message (data) {
+    var message = data.message;
+    // make all words of the type #[0-9]+ into proper links
+    message = message.replace(/#([0-9]+)/gi, '<a href="javascript:void(0)" class="prezi-go-to" slide-number="$1">#$1</a>');
     structure.messages.append(
       '<li id="'+data.id+'" user_id="'+data.user_id+'">'+
         '<img src="'+data.photo+'" alt="image" />'+
         '<h4>'+data.name+'</h4>'+
-        '<div>'+data.message+'</div>'+
+        '<div>'+message+'</div>'+
         '<div class="meta">'+data.timestamp+'</div>'+
       '</li>'
     );
-    // console.info('['+data.timestamp+'] '+data.id+': '+data.message);
+    structure.messages.on('click.prezi-go-to', '.prezi-go-to', function go_to (event) {
+      event.preventDefault();
+      PreziControl.Prezi.toStep(Number($(this).attr('slide-number')));
+    });
   };
 
   function chat (message) {
