@@ -42,6 +42,7 @@ var handlers_root = './handlers';
 var handler_paths = [
   handlers_root + '/init.js',
   handlers_root + '/comments.js',
+  handlers_root + '/control_prezi.js'
 ];
 
 var handlers = {};

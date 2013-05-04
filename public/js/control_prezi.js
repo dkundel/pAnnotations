@@ -16,18 +16,23 @@
       socket.emit('moveSlide', data);
     });
 
-    socket.on('getSlide', function(data) {
+    socket.on('getSlidePresenter', function(data) {
       var dataOut = {};
-      dataOut.idx = PC.Prezi.getStep();
-      socket.emit('updateSlide', dataOut);
+      var idx = PC.Prezi.getCurrentStep();
+      dataOut.idx = idx;
+      socket.emit('moveSlide', dataOut);
     });
   };
 
-  Prezi.initListener = function _initListener ($Prezi) {
+  PC.initListener = function _initListener ($Prezi) {
     PC.init($Prezi);
-    socket.emit('getSlide');
     socket.on('updateSlide', function(data) {
       PC.Prezi.toStep(data.idx);
+    });
+    PC.Prezi.on(PreziPlayer.EVENT_STATUS, function(args){
+      if (args.value == PreziPlayer.STATUS_CONTENT_READY) {
+        socket.emit('getSlide');
+      }
     });
   };
 
