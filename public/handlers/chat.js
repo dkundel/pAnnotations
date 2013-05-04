@@ -129,9 +129,10 @@ var messages = [];
       event.stopPropagation();
       event.stopImmediatePropagation();
       PreziControl.Prezi.toObject($(this).attr('object-id'));
+      console.log($(this).attr('method'))
       PreziControl.Prezi[$(this).attr('method')](
         $(this).attr('object-id'),
-        $(this).attr('value')
+        $(this).attr('replace')
       );
     });
     structure.chat_wrapper.
@@ -187,7 +188,7 @@ var messages = [];
     if (data.revision_image) {
       revisions += '<a href="#" object-id="'+data.revision_image.id+'" replace="'+data.revision_image.value+'" class="object-revision" method="setImageUrl">text revision</a>';
     }
-    revisions = '<div class="revisions">'+revisions+'</div>';
+    revisions = '<div class="message-revisions">'+revisions+'</div>';
 
 
     structure.messages.append(

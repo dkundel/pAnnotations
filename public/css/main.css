@@ -5,6 +5,10 @@ body,
 html {
   width: 100%;
 }
+h1 {
+  text-shadow: 0px 1px 2px #000000;
+  color: #207ce5;
+}
 .container {
   width: 1200px;
 }
@@ -37,6 +41,19 @@ html {
   height: 100%;
   background: rgba(0, 0, 0, 0.7);
   color: #fff;
+  text-align: center;
+}
+#chat .revisions h3 {
+  font-size: 17px;
+}
+#chat .revisions > input {
+  float: none;
+  width: 200px;
+  margin: 5px auto;
+}
+#chat .revisions > select {
+  width: 200px;
+  margin: 5px auto;
 }
 #chat > div {
   background: #499bea;
@@ -71,7 +88,7 @@ html {
   font-size: 15px;
   line-height: 30px;
 }
-#chat > div input {
+#chat > div > input {
   font-size: 13px;
   height: 20px;
   border-radius: 0;
