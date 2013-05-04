@@ -29,3 +29,9 @@ html {
 #comments {
   float: left;
 }
+
+.videoFrame{
+
+  width: 200px;
+  margin-bottom: 20px;
+}
