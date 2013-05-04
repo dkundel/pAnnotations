@@ -10,7 +10,10 @@
 
   handlers.chat = function on_chat (socket, data) {
     var defaults = {
-      id: 'no-id',
+      id: messages.length,
+      user_id: 'no-user-id',
+      photo: '/img/no-photo.jpg',
+      name: 'Anonymous',
       message: '(no message)'
     };
     var new_message = {};
