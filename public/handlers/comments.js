@@ -1,3 +1,3 @@
-(function comments_handlers_module (exports) {
-  // to be added, check /handlers/init.js for demo
+(function comments_handlers_module (handlers) {
+  
 })(window.socket_handlers);
