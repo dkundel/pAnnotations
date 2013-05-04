@@ -29,12 +29,15 @@
     //var sub = TB.initSubscriber(apiKey, 'mySubDiv');
     session.publish(publisher);
     //session.subscribe(sub);
+    $('#'+publishDiv).css('width','200px');
   }
 
   exports.streaming.clientConnectedHandler = function(event){
 
     if(event.streams[0])
-      session.subscribe( event.streams[0], publishDiv);
+      session.subscribe(event.streams[0], publishDiv);
+
+    $('#'+publishDiv).css('width','200px');
   }
 
   $(function(){
