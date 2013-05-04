@@ -11,3 +11,7 @@ function User (options) {
   };
   return $.extend(defaults, options, methods);
 }
+
+function jq_element (type) {
+  return $(document.createElement(type));
+}

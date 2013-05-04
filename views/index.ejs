@@ -53,12 +53,6 @@
              fjs.parentNode.insertBefore(js, fjs);
            }(document, 'script', 'facebook-jssdk'));
         </script>
-        <!--[if lt IE 7]>
-            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
-        <![endif]-->
-
-        <!-- This code is taken from http://twitter.github.com/bootstrap/examples/hero.html -->
-
 
         <div class="container">
           <div class="row">
@@ -73,14 +67,32 @@
         <script>window.jQuery || document.write('<script src="/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
 
         <script src="/js/vendor/bootstrap.min.js"></script>
+        
+        <script src="/js/lib.js"></script>
+        <script>
+          // all socket handler modules should be added here
+          // check /handlers/init.js for demo
+          window.socket_handlers = {};
+        </script>
+        <script src="/handlers/init.js"></script>
+        <script src="/handlers/chat.js"></script>
+        <script src="/handlers/comments.js"></script>
+        <script>
+          var socket = io.connect(window.location.origin);
+          (function register_handlers () {
+            for (var name in socket_handlers) {
+              socket.on(name, 
+                (function handler_wrapper (handler_name) {
+                  return function (data) {
+                    socket_handlers[handler_name](socket, data);
+                  }
+                })(name)
+              );
+            }
+          })();
+        </script>
 
         <script src="/js/main.js"></script>
-
-        <script>
-            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
-            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-            s.parentNode.insertBefore(g,s)}(document,'script'));
-        </script>
+        
     </body>
 </html>
