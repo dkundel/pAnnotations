@@ -4,6 +4,19 @@
    Author's custom styles
    ========================================================================== */
 
+@blue: #207ce5;
+
+.gradient() {
+  background: rgb(73,155,234); /* Old browsers */
+    background: -moz-linear-gradient(top,  rgba(73,155,234,1) 0%, rgba(32,124,229,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(73,155,234,1)), color-stop(100%,rgba(32,124,229,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  rgba(73,155,234,1) 0%,rgba(32,124,229,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  rgba(73,155,234,1) 0%,rgba(32,124,229,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  rgba(73,155,234,1) 0%,rgba(32,124,229,1) 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  rgba(73,155,234,1) 0%,rgba(32,124,229,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#499bea', endColorstr='#207ce5',GradientType=0 ); /* IE6-9 */
+}
+
 body, html {
   width: 100%;
 }
@@ -13,16 +26,17 @@ body, html {
 }
 
 #sidebar {
-  border: 1px solid #ccc;
+  border: 2px dashed @blue;
+  //border: 1px solid #ccc;
   background-color: #fff;
   //min-height: 400px;
-  height: 500px;
+  height: 480px;
   //margin: 5px;
 }
 #prezi {
   float: left;
   iframe {
-    border: 2px dashed #1c18ff;
+    border: 2px dashed @blue;
     position: relative;
     width: 100%;
   }
@@ -31,33 +45,73 @@ body, html {
   position: relative;
   float: left;
   width: 300px;
+  > div {
+    .gradient;
+    color: #fff;
+    height: 30px;
+    border-bottom: 1px solid (@blue - #222);
+    text-align: right;
+    vertical-align: middle;
+    font-size: 15px;
+    line-height: 30px;
+    input {
+      font-size: 13px;
+      height: 20px;
+      border-radius: 0;
+      text-align: right;
+      width: 57px;
+      float: right;
+      margin-bottom: 0px;
+      margin-left: 12px;
+    }
+  }
   ul {
     width: 300px;
     margin: 0;
     padding:0;
-    height: 300px;
+    height: 211px;
     overflow: auto;
     li {      
         list-style: none;
         padding: 5px;
         img {        
-          height: 30px;
+          height: 27px;
           float: left;
           margin-right: 10px;
         }
         h4 {
-          line-height: 10px;
+          vertical-align: middle;
+          margin: 0px;
+          line-height: 31px;
+          font-size: 12.5px;
+          &:after {
+            content: ": ";
+          }
+        }
+        div:first-of-type {
+          font-size: 11.5px;
+          margin-left: 10px;
+          overflow: fold;
+          word-wrap: break-word;
+          max-width: 265px;
         }
         .meta {
+          border-top: 0px;
           font-size: 10px;
           color: darkgrey;
           float: right;
         }
       &:nth-child(odd) {
         background: #eee;
+        div:first-of-type  {
+          border-top: 1px solid darkgrey;
+        }
       }
       &:nth-child(even) {
         background: #fff;
+        div:first-of-type {
+          border-top: 1px solid lightgrey;
+        }
       }
     }
   }
@@ -75,6 +129,9 @@ body, html {
       height: 20px;
     }
     input[type='submit'] {
+      .gradient;
+      color: #fff;
+      border: 0px;
       top: 0;
       right: 0;
       position: absolute;
