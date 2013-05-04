@@ -23,14 +23,18 @@
 	<script src="http://static.opentok.com/webrtc/v2.0/js/TB.min.js" ></script>
         <script src="/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 	<script src="/js/vendor/socket.io.js"></script>
+<<<<<<< HEAD
         <script src="/js/vendor/prezi_player.js"></script>
         <script src="/js/vendor/prezi_editor.js"></script>
+=======
+        <script src="/js/vendor/prezi_player.js"></script>	
+	<script src="/js/fbIntegration.js"></script>
+>>>>>>> b0e2dc914bf5da62518e2adc767394e60c87ca8f
         <script>
             window.presenter = <%= presenter %>;
             window.socket = io.connect(window.location.origin);
         </script>
         <script src="/js/control_prezi.js"></script>	
-
     </head>
     <body>
         <div id="fb-root"></div>
@@ -42,7 +46,8 @@
               status     : true,                                 // Check Facebook Login status
               xfbml      : true                                  // Look for social plugins on the page
             });
-
+	  
+	  window.fbApi.checkFbStatus();
             // Additional initialization code such as adding Event Listeners goes here
           };
 
@@ -99,8 +104,5 @@
             }
           })();
         </script>
-
-        
-        
     </body>
 </html>

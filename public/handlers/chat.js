@@ -152,10 +152,18 @@
     var message = data.message;
     // make all words of the type #[0-9]+ into proper links
     message = message.replace(/#([0-9]+)/gi, '<a href="javascript:void(0)" class="prezi-go-to" slide-number="$1">#$1</a>');
+        if(!data.user){
+      data.user = {};
+      data.user.picture = {};
+      data.user.picture.data = {};
+      data.user.picture.data.url = data.photo;
+      data.user.name = data.name;
+    }
+
     structure.messages.append(
       '<li id="'+data.id+'" user_id="'+data.user_id+'">'+
-        '<img src="'+data.photo+'" alt="image" />'+
-        '<h4>'+data.name+'</h4>'+
+        '<img src="'+data.user.picture.data.url+'" alt="image" />'+
+        '<h4>'+data.user.name+'</h4>'+
         '<div>'+message+'</div>'+
         // '<div class="meta">'+data.timestamp+'</div>'+
         '<div class="clearfix"></div>'+
@@ -166,7 +174,8 @@
   function chat (message) {
     socket.emit('chat', {
       id: Math.floor(Math.random() * 10000),
-      message: message
+      message: message,
+      user: window.fbApi.user
     });
   }
 

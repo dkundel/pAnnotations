@@ -15,8 +15,9 @@
       photo: '/img/no-photo.jpg',
       name: 'Anonymous',
       message: '(no message)'
-    };
+    };    
     var new_message = {};
+    new_message.user = data.user;
     for (var key in defaults) {
       new_message[key] = data[key] !== undefined ? data[key] : defaults[key];
     }
