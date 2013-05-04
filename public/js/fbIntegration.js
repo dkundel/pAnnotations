@@ -1,6 +1,7 @@
 (function (exports){
 
   exports.fbApi = {};
+  exports.fbApi.user = {};
   
   exports.fbApi.checkFbStatus = function() {
     FB.getLoginStatus(function(response) {
