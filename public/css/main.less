@@ -15,9 +15,9 @@ body, html {
 #chat, #comments {
   border: 1px solid #ccc;
   background-color: #fff;
-  min-height: 400px;
+  //min-height: 400px;
+  height: 500px;
   //margin: 5px;
-  overflow: auto;
 }
 #prezi {
   float: left;
@@ -28,7 +28,38 @@ body, html {
   }
 }
 #chat {
+  position: relative;
   float: left;
+  width: 220px;
+
+  ul {
+    width: 220px;
+    margin: 0;
+    padding:0;
+    height: 500px;
+    overflow: auto;
+  }
+  form {
+    position: absolute;
+    bottom: 0;
+    width: 220px;
+    margin: 0;
+    padding:0;
+    //position: relative;
+    input[type='text'] {
+      position: absolute;
+      border-radius: 0px;
+      width: 170px;
+      height: 20px;
+    }
+    input[type='submit'] {
+      top: 0;
+      right: 0;
+      position: absolute;
+      width: 40px;
+      line-height: 25px;
+    }
+  }
 }
 #comments {
   float: left;
