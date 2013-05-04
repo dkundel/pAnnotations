@@ -1,3 +1,4 @@
+var messages = [];
 (function chat_handlers_module (handlers) {
 
   var structure = {
@@ -9,11 +10,12 @@
     chat: jq_element('input'),
     chat_submit: jq_element('input'),
     revisions: jq_element('div'),
+    revisions_text_id: jq_element('select'),
     revisions_text_input: jq_element('input'),
+    revisions_image_id: jq_element('select'),
     revisions_image_input: jq_element('input')
   };
 
-  var messages = [];
 
   var objects = null;
 
@@ -40,8 +42,7 @@
   }
 
   function make_revisions () {
-    var texts = jq_element('select');
-    var images = jq_element('div');
+    var texts = structure.revisions_text_id;
     objects.texts.forEach(function (text) {
       texts.append(
         jq_element('option').attr({
@@ -53,14 +54,23 @@
       PreziControl.Prezi.toObject($(this).val());
     });
     structure.revisions_text_input.
-      on('change', function on_change () {
+      on('keyup', function on_change () {
         PreziControl.Prezi.setText(texts.val(), $(this).val());
       });
+
+    var images = structure.revisions_image_id;
     objects.images.forEach(function (image) {
       images.append(
-
+        jq_element('option').attr({
+          value: image.objectId
+        }).html(image.url)
       );
     });
+    structure.revisions_image_input.
+      on('keyup', function on_change () {
+        PreziControl.Prezi.setText(images.val(), $(this).val());
+      });
+
     structure.revisions.append(
       jq_element('h3').html('Add a text revision'),
       structure.revisions_text_input.attr({type: 'text'}),
@@ -114,6 +124,16 @@
       event.preventDefault();
       go_to(Number($(this).attr('slide-number')));
     });
+    structure.messages.on('click.show-revision', '.object-revision', function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      event.stopImmediatePropagation();
+      PreziControl.Prezi.toObject($(this).attr('object-id'));
+      PreziControl.Prezi[$(this).attr('method')](
+        $(this).attr('object-id'),
+        $(this).attr('value')
+      );
+    });
     structure.chat_wrapper.
       on('keydown', function on_keydown (event) {
         var R_keyCode = 82;
@@ -160,23 +180,48 @@
       data.user.name = data.name;
     }
 
+    var revisions = '';
+    if (data.revision_text) {
+      revisions += '<a href="#" object-id="'+data.revision_text.id+'" replace="'+data.revision_text.value+'" class="object-revision" method="setText">text revision</a>';
+    }
+    if (data.revision_image) {
+      revisions += '<a href="#" object-id="'+data.revision_image.id+'" replace="'+data.revision_image.value+'" class="object-revision" method="setImageUrl">text revision</a>';
+    }
+    revisions = '<div class="revisions">'+revisions+'</div>';
+
+
     structure.messages.append(
       '<li id="'+data.id+'" user_id="'+data.user_id+'">'+
         '<img src="'+data.user.picture.data.url+'" alt="image" />'+
         '<h4>'+data.user.name+'</h4>'+
         '<div>'+message+'</div>'+
         // '<div class="meta">'+data.timestamp+'</div>'+
+        revisions+
         '<div class="clearfix"></div>'+
       '</li>'
     );
+    structure.messages[0].scrollTop = structure.messages[0].scrollHeight;
   };
 
   function chat (message) {
-    socket.emit('chat', {
+    var obj = {
       id: Math.floor(Math.random() * 10000),
       message: message,
       user: window.fbApi.user
-    });
+    };
+    if (structure.revisions_text_input.val().length > 0) {
+      obj.revision_text = {
+        id: structure.revisions_text_id.val(),
+        value: structure.revisions_text_input.val()
+      };
+    }
+    if (structure.revisions_image_input.val().length > 0) {
+      obj.revision_image = {
+        id: structure.revisions_image_id.val(),
+        value: structure.revisions_image_input.val()
+      };
+    }
+    socket.emit('chat', obj);
   }
 
 })(window.socket_handlers);
