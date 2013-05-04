@@ -1,0 +1,8 @@
+<script src="/js/vendor/socket.io.js"></script>
+<script>
+  var socket = io.connect(window.location.origin);
+  socket.emit('echo', 'trololoo');
+  socket.on('echo', function (data) {
+    console.log('echoed', data);
+  });
+</script>

@@ -3,14 +3,6 @@
  * Module dependencies.
  */
 
-var io = require('socket.io').listen(6666);
-
-io.sockets.on('connection', function (socket) {
-  socket.on('vStream ', function (data) {
-    console.log(data);
-  });
-});
-
 var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
@@ -39,6 +31,19 @@ app.configure('development', function(){
 app.get('/', routes.index);
 app.get('/users', user.list);
 
-http.createServer(app).listen(app.get('port'), function(){
+var server = http.createServer(app);
+server.listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
+});
+
+var io = require('socket.io').listen(server);
+
+io.sockets.on('connection', function (socket) {
+  socket.on('echo', function (data) {
+    socket.emit('echo', data);
+    console.log('echoed', data);
+  });
+  socket.on('vStream ', function (data) {
+    console.log(data);
+  });
 });
