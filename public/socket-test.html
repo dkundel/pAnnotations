@@ -1,10 +1,14 @@
 <script src="/js/vendor/socket.io.js"></script>
+<script src="/js/vendor/jquery-1.9.1.min.js"></script>
+<script src="/js/lib.js"></script>
 <script>
   // all socket handler modules should be added here
   // check /handlers/init.js for demo
   window.socket_handlers = {};
 </script>
 <script src="/handlers/init.js"></script>
+<script src="/handlers/chat.js"></script>
+<script src="/handlers/comments.js"></script>
 <script>
   var socket = io.connect(window.location.origin);
   (function register_handlers () {
@@ -18,8 +22,7 @@
       );
     }
   })();
-  socket.emit('echo', 'trololoo');
-  // socket.on('echo', function (data) {
-  //   console.log('echoed', data);
-  // });
 </script>
+
+<div id="chat">
+</div>

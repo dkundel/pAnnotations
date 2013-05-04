@@ -42,12 +42,21 @@ var handlers_root = './handlers';
 var handler_paths = [
   handlers_root + '/init.js',
   handlers_root + '/comments.js',
-  handlers_root + '/control_prezi.js'
+  handlers_root + '/control_prezi.js',
+  handlers_root + '/chat.js'
 ];
 
-var handlers = {};
+var handlers = {
+  __init: []  // all init functions from each handler module are stored here
+};
 handler_paths.forEach(function load_handlers (path) {
   var handler_file = require(path);
+  // check for __init functions and queue them
+  if (handler_file.__init) {
+    handlers.__init.push(handler_file.__init);
+    delete handler_file.__init;
+  }
+  // save handlers
   for (var name in handler_file) {
     if (handlers[name]) {
       throw 'Duplicate handler name';
@@ -57,7 +66,19 @@ handler_paths.forEach(function load_handlers (path) {
 });
 
 io.sockets.on('connection', function (socket) {
+  var exclude = [ // which handler names to exclude from binding
+    '__init'
+  ];
+  // run __init functions 
+  handlers.__init.forEach(function init_handler_modules (callback) {
+    callback(socket);
+  });
+
+  // register handlers to the socket
   for (var name in handlers) {
+    if (exclude.indexOf(name) > -1) {
+      continue;
+    }
     socket.on(name, 
       (function handler_wrapper (handler_name) {
         return function (data) {
