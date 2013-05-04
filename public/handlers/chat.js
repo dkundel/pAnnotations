@@ -42,11 +42,20 @@
     };
   }
 
-  function add_message (data) {
+  function add_message (data) {    
+
+    if(!data.user){
+      data.user = {};
+      data.user.picture = {};
+      data.user.picture.data = {};
+      data.user.picture.data.url = data.photo;
+      data.user.name = data.name;
+    }
+
     structure.messages.append(
       '<li id="'+data.id+'" user_id="'+data.user_id+'">'+
-        '<img src="'+data.photo+'" alt="image" />'+
-        '<h4>'+data.name+'</h4>'+
+        '<img src="'+data.user.picture.data.url+'" alt="image" />'+
+        '<h4>'+data.user.name+'</h4>'+
         '<div>'+data.message+'</div>'+
         '<div class="meta">'+data.timestamp+'</div>'+
       '</li>'
@@ -57,7 +66,8 @@
   function chat (message) {
     socket.emit('chat', {
       id: Math.floor(Math.random() * 10000),
-      message: message
+      message: message,
+      user: window.fbApi.user
     });
   }
 
