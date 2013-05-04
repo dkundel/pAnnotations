@@ -32,7 +32,6 @@
 
   function register_socket_handlers () {
     handlers.chat = function on_chat (socket, data) {
-      console.log(data);
       add_message(data);
     };
 
@@ -52,7 +51,7 @@
         '<div class="meta">'+data.timestamp+'</div>'+
       '</li>'
     );
-    console.info('['+data.timestamp+'] '+data.id+': '+data.message);
+    // console.info('['+data.timestamp+'] '+data.id+': '+data.message);
   };
 
   function chat (message) {
