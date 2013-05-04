@@ -20,14 +20,15 @@
         <!--<link rel="stylesheet" href="/css/bootstrap-responsive.min.css">-->
         <link rel="stylesheet" href="/css/main.css">	
 
+	<script src="http://static.opentok.com/webrtc/v2.0/js/TB.min.js" ></script>
         <script src="/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-	     <script src="/js/vendor/socket.io.js"></script>
+	<script src="/js/vendor/socket.io.js"></script>
         <script src="/js/vendor/prezi_player.js"></script>
         <script>
             window.presenter = <%= presenter %>;
             window.socket = io.connect(window.location.origin);
         </script>
-        <script src="/js/control_prezi.js"></script>
+        <script src="/js/control_prezi.js"></script>	
 
     </head>
     <body>
@@ -56,11 +57,12 @@
 
         <div class="container">
           <div class="row">
-            <div id="comments" class="span3"></div>
-            <div id="prezi" class="span9" data-prezi="swbce1k38-au"></div>
-            <div id="chat" class="span3"></div>
+            <div id="prezi" class="span10" data-prezi="swbce1k38-au"></div>
+            <div  id="sidebar" class="span4">
+              <div id="stream"></div>
+              <div id="chat"></div>
+	          </div>
           </div>
-          <div id="audio"></div>
         </div> <!-- /container -->
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -77,6 +79,7 @@
         <script src="/handlers/init.js"></script>
         <script src="/handlers/chat.js"></script>
         <script src="/handlers/comments.js"></script>
+	<script src="/js/audioStreams.js"></script>
         <script>
           var socket = io.connect(window.location.origin);
           (function register_handlers () {
