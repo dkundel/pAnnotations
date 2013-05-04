@@ -8,12 +8,7 @@ html {
 .container {
   width: 1200px;
 }
-<<<<<<< Updated upstream
 #sidebar {
-=======
-#chat,
-#comments {
->>>>>>> Stashed changes
   border: 1px solid #ccc;
   background-color: #fff;
   height: 500px;
@@ -29,7 +24,6 @@ html {
 #chat {
   position: relative;
   float: left;
-<<<<<<< Updated upstream
   width: 300px;
 }
 #chat ul {
@@ -66,32 +60,13 @@ html {
   position: absolute;
   bottom: 0;
   width: 300px;
-=======
-  width: 220px;
-}
-#chat ul {
-  width: 220px;
-  margin: 0;
-  padding: 0;
-  height: 500px;
-  overflow: auto;
-}
-#chat form {
-  position: absolute;
-  bottom: 0;
-  width: 220px;
->>>>>>> Stashed changes
   margin: 0;
   padding: 0;
 }
 #chat form input[type='text'] {
   position: absolute;
   border-radius: 0px;
-<<<<<<< Updated upstream
   width: 250px;
-=======
-  width: 170px;
->>>>>>> Stashed changes
   height: 20px;
 }
 #chat form input[type='submit'] {

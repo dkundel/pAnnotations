@@ -53,7 +53,7 @@
           show();
       }
     });
-    structure.messages.on('click.prezi-go-to', '.prezi-go-to', function go_to (event) {
+    structure.messages.on('click.prezi-go-to', '.prezi-go-to', function (event) {
       event.preventDefault();
       go_to(Number($(this).attr('slide-number')));
     });
