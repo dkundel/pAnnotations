@@ -17,7 +17,7 @@
                 padding-bottom: 40px;
             }
         </style>
-        <link rel="stylesheet" href="/css/bootstrap-responsive.min.css">
+        <!--<link rel="stylesheet" href="/css/bootstrap-responsive.min.css">-->
         <link rel="stylesheet" href="/css/main.css">	
 
         <script src="/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
@@ -61,10 +61,12 @@
 
 
         <div class="container">
-            <div id="comments"></div>
-            <div id="prezi" data-prezi="swbce1k38-au"></div>
-            <div id="chat"></div>
-            <div id="audio"></div>
+          <div class="row">
+            <div id="comments" class="span3"></div>
+            <div id="prezi" class="span9" data-prezi="swbce1k38-au"></div>
+            <div id="chat" class="span3"></div>
+          </div>
+          <div id="audio"></div>
         </div> <!-- /container -->
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
