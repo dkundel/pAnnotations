@@ -12,8 +12,7 @@ html {
 #comments {
   border: 1px solid #ccc;
   background-color: #fff;
-  min-height: 400px;
-  overflow: auto;
+  height: 500px;
 }
 #prezi {
   float: left;
@@ -24,14 +23,37 @@ html {
   width: 100%;
 }
 #chat {
+  position: relative;
   float: left;
+  width: 220px;
+}
+#chat ul {
+  width: 220px;
+  margin: 0;
+  padding: 0;
+  height: 500px;
+  overflow: auto;
+}
+#chat form {
+  position: absolute;
+  bottom: 0;
+  width: 220px;
+  margin: 0;
+  padding: 0;
+}
+#chat form input[type='text'] {
+  position: absolute;
+  border-radius: 0px;
+  width: 170px;
+  height: 20px;
+}
+#chat form input[type='submit'] {
+  top: 0;
+  right: 0;
+  position: absolute;
+  width: 40px;
+  line-height: 25px;
 }
 #comments {
   float: left;
-}
-
-.videoFrame{
-
-  width: 200px;
-  margin-bottom: 20px;
 }
