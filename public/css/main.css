@@ -1,0 +1,81 @@
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+body,
+html {
+  width: 100%;
+}
+.container {
+  width: 1200px;
+}
+#sidebar {
+  border: 1px solid #ccc;
+  background-color: #fff;
+  height: 500px;
+}
+#prezi {
+  float: left;
+}
+#prezi iframe {
+  border: 2px dashed #1c18ff;
+  position: relative;
+  width: 100%;
+}
+#chat {
+  position: relative;
+  float: left;
+  width: 300px;
+}
+#chat ul {
+  width: 300px;
+  margin: 0;
+  padding: 0;
+  height: 300px;
+  overflow: auto;
+}
+#chat ul li {
+  list-style: none;
+  padding: 5px;
+}
+#chat ul li img {
+  height: 30px;
+  float: left;
+  margin-right: 10px;
+}
+#chat ul li h4 {
+  line-height: 10px;
+}
+#chat ul li .meta {
+  font-size: 10px;
+  color: darkgrey;
+  float: right;
+}
+#chat ul li:nth-child(odd) {
+  background: #eee;
+}
+#chat ul li:nth-child(even) {
+  background: #fff;
+}
+#chat form {
+  position: absolute;
+  bottom: 0;
+  width: 300px;
+  margin: 0;
+  padding: 0;
+}
+#chat form input[type='text'] {
+  position: absolute;
+  border-radius: 0px;
+  width: 250px;
+  height: 20px;
+}
+#chat form input[type='submit'] {
+  top: 0;
+  right: 0;
+  position: absolute;
+  width: 40px;
+  line-height: 25px;
+}
+#comments {
+  float: left;
+}
