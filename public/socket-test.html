@@ -1,8 +1,25 @@
 <script src="/js/vendor/socket.io.js"></script>
 <script>
+  // all socket handler modules should be added here
+  // check /handlers/init.js for demo
+  window.socket_handlers = {};
+</script>
+<script src="/handlers/init.js"></script>
+<script>
   var socket = io.connect(window.location.origin);
+  (function register_handlers () {
+    for (var name in socket_handlers) {
+      socket.on(name, 
+        (function handler_wrapper (handler_name) {
+          return function (data) {
+            socket_handlers[handler_name](socket, data);
+          }
+        })(name)
+      );
+    }
+  })();
   socket.emit('echo', 'trololoo');
-  socket.on('echo', function (data) {
-    console.log('echoed', data);
-  });
+  // socket.on('echo', function (data) {
+  //   console.log('echoed', data);
+  // });
 </script>

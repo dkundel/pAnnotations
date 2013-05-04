@@ -38,12 +38,31 @@ server.listen(app.get('port'), function(){
 
 var io = require('socket.io').listen(server, {log: false});
 
+var handlers_root = './handlers';
+var handler_paths = [
+  handlers_root + '/init.js',
+  handlers_root + '/comments.js',
+];
+
+var handlers = {};
+handler_paths.forEach(function load_handlers (path) {
+  var handler_file = require(path);
+  for (var name in handler_file) {
+    if (handlers[name]) {
+      throw 'Duplicate handler name';
+    }
+    handlers[name] = handler_file[name];
+  }
+});
+
 io.sockets.on('connection', function (socket) {
-  socket.on('echo', function (data) {
-    socket.emit('echo', data);
-    console.log('echoed', data);
-  });
-  socket.on('vStream ', function (data) {
-    console.log(data);
-  });
+  for (var name in handlers) {
+    socket.on(name, 
+      (function handler_wrapper (handler_name) {
+        return function (data) {
+          handlers[handler_name](socket, data);
+        }
+      })(name)
+    );
+  }
 });
