@@ -9,7 +9,8 @@
       } else if (response.status === 'not_authorized') {
 	exports.fbApi.user = null;
       } else {
-	exports.fbApi.user = null;
+	window.fbApi.login();
+	//exports.fbApi.user = null;
       }
     });
   };
