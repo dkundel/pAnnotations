@@ -5,7 +5,7 @@
   PC.init = function _init ($Prezi) {
     var id = $Prezi.attr('id');
     var preziId = $Prezi.attr('data-prezi');
-    PC.Prezi = new PreziPlayer(id, {preziId: preziId});
+    PC.Prezi = new PreziPlayer(id, {preziId: preziId, controls: true});
   };
 
   PC.initPresenter = function _initPresenter ($Prezi) {
